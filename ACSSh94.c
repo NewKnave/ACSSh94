@@ -11,7 +11,7 @@ void manual(void) {
 	printf("ACSSh94 Manual\n");
 
 	printf("\tValid key\n");
-	printf("\t\t number 1 to 94 (example: 1, 10, or 11)\n");
+	printf("\t\tnumber 1 to 94 (example: 1, 10, or 11)\n");
 
 	printf("\tOption\n");
 	printf("\t\t-e\tEncrypt\n");
@@ -34,7 +34,12 @@ void encryption(FILE *File, const int Key, FILE *NewEncryptedFile) {
 	int ASCII = 0;
 
 	fseek(File, 0, SEEK_END);
-	long size = ftell(File) - 1;
+	// in my computer, a .txt file tend to
+	// have an extra character at the
+	// end of the file that is visible as a triangle with a ?
+	// especially when it is decrypted
+	// hence, a "-1" is used here
+	unsigned long size = ftell(File) - 1;
 	fseek(File, 0, SEEK_SET);
 
 	for(int i = 0; i < size; i++) {
